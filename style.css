@@ -1,24 +1,31 @@
 body {
     background-color: #1F2937;
     font-family: 'Roboto', sans-serif;
+    margin: 25px 80px;
+}
+
+.top-header-content a {
+    color: #E5E7EB;
+    text-decoration: none;
 }
 
 .front-header {
     display: flex;
     justify-content: center;
-    margin: 0 80px 120px 80px;
+    margin: 0 0 120px 0;
 }
 
 .front-header h1 {
     flex: 1;
+    align-self: center;
     font-size: 24px;
     color: #F9FAF8;
-    margin: 20px;
+    margin: 0;
     padding: 0;
     border: 0;
 }
 
-ul.header-links {
+.header-links {
     display: flex;
     align-items: center;
     gap: 25px;
@@ -29,21 +36,66 @@ ul.header-links {
     border: 0;
 }
 
+.hero-text {
+    display: flex;
+   /* border: 10px solid red; */
+    
+}
+
+.hero-text > * {
+    display: flex;
+    flex-basis: 100%;
+}
+
 .main-hero {
+    display: flex;
+    flex-direction: column;
+    width: 470px;
+    margin: 0 30px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.main-hero button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #3882F6;
+    color: #F9FAF8;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+}
+
+.hero-button a {
+    margin: -7px -35px;
+    padding: 7px 35px;
+}
+
+.hero-button:hover {
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2),0 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+
+.hero-title {
     font-size: 48px;
     color: #F9FAF8;
     font-weight: 1000;
-    margin: 0 80px;
-    padding: 10px;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
 .sub-hero {
     font-size: 18px;
     color: #E5E7EB;
-    margin: 0 80px;
-    padding: 10px;
+    font-weight: 100;
+    margin: 0 0 10px 0;
+    padding: 0;
+    border: 0;
 }
 
-.hero-text {
-    display: flex;
+.hero-image {
+    flex: 1 1 auto;
 }
+
