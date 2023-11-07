@@ -1,7 +1,15 @@
 body {
     background-color: #1F2937;
     font-family: 'Roboto', sans-serif;
-    margin: 25px 80px;
+    margin: 5px 80px;
+}
+
+
+/* HEADER */
+
+.top-header-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .top-header-content a {
@@ -12,7 +20,7 @@ body {
 .front-header {
     display: flex;
     justify-content: center;
-    margin: 0 0 120px 0;
+    margin: 0 0 110px 0;
 }
 
 .front-header h1 {
@@ -32,31 +40,56 @@ body {
     list-style: none;
     font-size: 18px;
     color: #E5E7EB;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 0;
     border: 0;
 }
 
-.hero-text {
+/* CONTAINER WITH TEXT AND IMAGE */
+
+.hero-container {
     display: flex;
-   /* border: 10px solid red; */
-    
+    /* border: 1px solid red; */
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
 }
 
-.hero-text > * {
+.hero-boxes {
     display: flex;
-    flex-basis: 100%;
-}
-
-.main-hero {
-    display: flex;
+    flex: 1;
     flex-direction: column;
-    width: 470px;
-    margin: 0 30px 0 0;
+    justify-content: center;
+    margin: 0;
     padding: 0;
+    /* border: 2px solid green; */
+    max-width: 540px;
+}
+
+.hero-awesome {
+    /* display: flex; */
+    font-size: 48px;
+    color: #F9FAF8;
+    font-weight: 1000;
+    margin: 0;
+    padding: 0 0 30px 0;
     border: 0;
 }
 
-.main-hero button {
+.sub-hero {
+    /* display: flex; */
+    /* flex: 0 1 auto; */
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #E5E7EB;
+    margin: 0;
+    padding: 0 0 15px 0;
+    border: 0;
+}
+
+.hero-boxes button {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     background-color: #3882F6;
@@ -68,34 +101,16 @@ body {
 }
 
 .hero-button a {
-    margin: -7px -35px;
-    padding: 7px 35px;
+    margin: -6px -35px -7px;
+    padding: 6px 35px 7px;
 }
 
 .hero-button:hover {
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2),0 10px 10px 0 rgba(0, 0, 0, 0.1);
 }
-
-
-.hero-title {
-    font-size: 48px;
-    color: #F9FAF8;
-    font-weight: 1000;
-    margin: 0;
-    padding: 0;
-    border: 0;
+.hero-image img {
+    /* border: 2px solid green; */
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
 }
-
-.sub-hero {
-    font-size: 18px;
-    color: #E5E7EB;
-    font-weight: 100;
-    margin: 0 0 10px 0;
-    padding: 0;
-    border: 0;
-}
-
-.hero-image {
-    flex: 1 1 auto;
-}
-
