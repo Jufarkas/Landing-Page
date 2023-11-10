@@ -320,11 +320,12 @@ body {
     padding: 120px 10px;
     color: #E5E7EB;
     text-align: center;
+    text-decoration: none;
 }
 
-.extralink,
-a {
-    text-decoration: none;
+#link {
+    text-decoration: underline;
+    color: #1F2937;
 }
 
 .linksecondpara {
@@ -334,6 +335,11 @@ a {
 
 .linkthirdpara {
     background-color: #3882F6;
+}
+
+.linkthirdpara p a {
+    text-decoration: underline;
+    color: #E5E7EB;
 }
 
 .linkfooter {
@@ -347,4 +353,9 @@ a {
     margin-left: auto;
     margin-right: auto;
     text-decoration: none;
+}
+
+.linkfooter a {
+    text-decoration: none;
+    color: #E5E7EB;
 }
