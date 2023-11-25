@@ -359,3 +359,17 @@ body {
     text-decoration: none;
     color: #E5E7EB;
 }
+
+
+/* Calculator */
+
+.calc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #afafb1;
+    height: 600px;
+    width: 400px;
+    border: 10px solid rgb(0, 0, 0);
+}
