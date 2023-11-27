@@ -363,6 +363,28 @@ body {
 
 /* Calculator */
 
+.calc .row-one button {
+    height: 70px;
+    width: 80px;
+}
+
+.calc .row-two button {
+    height: 70px;
+    width: 80px;
+}
+.calc .row-three button {
+    height: 70px;
+    width: 80px;
+}
+.calc .row-four button {
+    height: 70px;
+    width: 80px;
+}
+.calc .row-five button {
+    height: 70px;
+    width: 80px;
+}
+
 .calc {
     display: flex;
     flex-direction: column;
