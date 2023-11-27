@@ -363,35 +363,61 @@ body {
 
 /* Calculator */
 
-.calc .row-one button {
-    height: 70px;
-    width: 80px;
-}
 
-.calc .row-two button {
-    height: 70px;
-    width: 80px;
-}
-.calc .row-three button {
-    height: 70px;
-    width: 80px;
-}
-.calc .row-four button {
-    height: 70px;
-    width: 80px;
-}
-.calc .row-five button {
-    height: 70px;
-    width: 80px;
-}
-
-.calc {
+.calc-body {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
-    background-color: #afafb1;
-    height: 600px;
     width: 400px;
+    height: auto;
+    background-color: #afafb1;
     border: 10px solid rgb(0, 0, 0);
+}
+
+.master-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+}
+
+.math-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.numbers .row-one button {
+    height: 70px;
+    width: 80px;
+}
+
+.numbers .row-two button {
+    height: 70px;
+    width: 80px;
+}
+
+.numbers .row-three button {
+    height: 70px;
+    width: 80px;
+}
+
+.numbers .row-four button {
+    height: 70px;
+    width: 80px;
+}
+
+
+.math-buttons .row-five button {
+    height: 70px;
+    width: 80px;
+}
+
+.math-buttons .row-six button {
+    height: 70px;
+    width: 80px;
 }
