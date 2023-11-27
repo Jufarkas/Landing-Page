@@ -381,7 +381,12 @@ body {
     justify-content: center;
 }
 
-.numbers {
+.top-buttons button {
+    height: 70px;
+    width: 80px;
+}
+
+.number-buttons {
     display: flex;
     flex-direction: column;
 }
@@ -391,26 +396,28 @@ body {
     flex-wrap: wrap;
 }
 
-.numbers .row-one button {
+.number-buttons .row-one button {
     height: 70px;
     width: 80px;
 }
 
-.numbers .row-two button {
+.number-buttons .row-two button {
     height: 70px;
     width: 80px;
 }
 
-.numbers .row-three button {
+.number-buttons .row-three button {
     height: 70px;
     width: 80px;
 }
 
-.numbers .row-four button {
+.number-buttons .row-four button {
     height: 70px;
     width: 80px;
 }
 
+
+/* changing styling, leaving old CSS and HTML
 
 .math-buttons .row-five button {
     height: 70px;
@@ -420,4 +427,4 @@ body {
 .math-buttons .row-six button {
     height: 70px;
     width: 80px;
-}
+} */
