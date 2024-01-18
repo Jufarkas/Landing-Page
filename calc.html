@@ -4,48 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
-    <script src="calcapp.js"></script>
+    <script src="calcapp.js" defer></script> 
+    
+    <!-- the "defer" at the end of the script tag above will not let the browser run the JS until the html content has all loaded -->
+    
     <title>Hidden Calculator</title>
 </head>
 <body>
     <div class="calc-body">
-        <h1 class="result">(value)</h1>
+        <h1 class="result">0</h1>
         <div class="master-buttons">
-            <div class="top-buttons">
-                <button>Clear</button>
-                <button>Del</button>
-                <button>RNG</button>
-                <button>Theme</button>
+            <div class="left-buttons">
+                <button id="clear">Clear</button>
+                <button id="del">Del</button>
+                <button id="rng">RNG</button>
+                <button id="night">Night Mode</button>
             </div>
-            <div class="number-buttons">
-                <div class="row-one">
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>+</button>
-                </div>
-                <div class="row-two">
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>-</button>
-                </div>
-                <div class="row-three">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>*</button>
-                </div>
-                <div class="row-four">
-                <button>.</button>
-                <button>0</button>
-                <button>=</button>
-                <button>/</button>
+            <div class="calc-buttons">
+                    <button class="number">7</button>
+                    <button class="number">8</button>
+                    <button class="number">9</button>
+                    <button class="mathFnc">+</button>
+                    <button class="number">4</button>
+                    <button class="number">5</button>
+                    <button class="number">6</button>
+                    <button class="mathFnc">-</button>
+                    <button class="number">1</button>
+                    <button class="number">2</button>
+                    <button class="number">3</button>
+                    <button class="mathFnc">*</button>
+                    <button class="number">.</button>
+                    <button class="number">0</button>
+                    <button class="mathFnc">=</button>
+                    <button class="mathFnc">/</button>
                 </div>
             </div>
 
-        <!-- changing styling, leaving old html for now -->
-        <!-- <div class="extra-buttons">
+        <!-- changing styling, commenting out old html and relevant CSS for now..
+
+        <div class="extra-buttons">
             <div class="row-five">
                 <button>+</button>
                 <button>-</button>
