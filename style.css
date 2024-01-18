@@ -377,18 +377,26 @@ body {
 
 .master-buttons {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    height: 500px;
 }
 
-.top-buttons button {
+.left-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left-buttons button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     height: 70px;
     width: 80px;
 }
 
-.number-buttons {
+.calc-buttons {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .math-buttons {
@@ -396,28 +404,17 @@ body {
     flex-wrap: wrap;
 }
 
-.number-buttons .row-one button {
-    height: 70px;
-    width: 80px;
-}
-
-.number-buttons .row-two button {
-    height: 70px;
-    width: 80px;
-}
-
-.number-buttons .row-three button {
-    height: 70px;
-    width: 80px;
-}
-
-.number-buttons .row-four button {
+.calc-buttons button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     height: 70px;
     width: 80px;
 }
 
 
-/* changing styling, leaving old CSS and HTML
+/* changing styling, commenting out old CSS and HTML
 
 .math-buttons .row-five button {
     height: 70px;
