@@ -2,7 +2,7 @@ const numberBtn = document.querySelectorAll('.number');
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 const rngBtn = document.getElementById('rng');
-const nightBtn = document.getElementById('night');
+const percentBtn = document.getElementById('percent');
 const mathBtns = document.querySelectorAll('.mathFnc');
 const allBtns = document.querySelectorAll('button');
 let viewport = document.querySelector('.result');
@@ -14,6 +14,7 @@ let mathFncHolder = "";
 let num1 = [];
 let num2 = [];
 let equalsHolder = [];
+let percentTrue = false;
 
 function btnListener() {
     numberBtn.forEach(button => {
@@ -29,7 +30,9 @@ function btnListener() {
     })
     allBtns.forEach(button => {
         button.addEventListener('click', () => {
-            if (button.textContent === "="){
+            if (button.textContent === "%"){
+                percentListener();
+            } else if (button.textContent === "="){
                 if (numHolder.join('') === '0' && mathFncHolder === "/"){
                     viewport.textContent = "How dare you..";
                 } else if (numHolder.length >= 1 && num1.length >= 1) {
@@ -196,8 +199,26 @@ function timeToMath(num1, num2, mathFncHolder) {
 //
 // ['x'] percent of ['y'] = ['z'] 
 //
-//
-//
-//
-//
-//
+
+
+function percentListener() {
+    if (percentTrue === true){
+        return;
+    } else {
+        percentTrue = true;
+        viewport.textContent = "";
+        let input1 = document.createElement('input');
+        let input2 = document.createElement('input');
+        let pText = document.createElement('p');
+        input1.type = "integer";
+        input1.classList.add("percent");
+        input2.type = "integer";
+        input2.classList.add("percent");
+        pText.classList.add("pText");
+        viewport.appendChild(input1);
+        viewport.appendChild(pText);
+        pText.textContent = "% of"
+        viewport.appendChild(input2);
+        viewport.appendChild(document.createElement("br"));
+    }
+}
