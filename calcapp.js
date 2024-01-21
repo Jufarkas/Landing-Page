@@ -15,6 +15,9 @@ let percentTrue = false;
 function btnListener() {
     numberBtn.forEach(button => {
         button.addEventListener('click', () => {
+            if (percentTrue === true){
+                percentTrue = false;
+            }
             if (num1.length > 0){
                 numHolder.push(button.textContent);
                 smallViewport.textContent = numHolder.join("");
@@ -28,6 +31,17 @@ function btnListener() {
         button.addEventListener('click', () => {
             if (button.textContent === "%"){
                 percentListener();
+                let percent1 = document.querySelector('.percent1');
+                let percent2 = document.querySelector('.percent2');
+                let pText2 = document.querySelector('.pText2')
+                percent1.addEventListener('input', () => {
+                    pText2.textContent = 
+                    "= " + Math.round(((percent1.value / 100) * percent2.value) * 1000)/1000;
+                })
+                percent2.addEventListener('input', () => {
+                    pText2.textContent = 
+                    "= " + Math.round(((percent1.value / 100) * percent2.value) * 1000)/1000;
+                })
             } else if (button.textContent === "="){
                 if (numHolder.join('') === '0' && mathFncHolder === "/"){
                     viewport.textContent = "How dare you..";
@@ -64,6 +78,7 @@ function btnListener() {
                     }
                 }
             } else if (button.textContent === "Del") {
+                percentTrue = false;
                 numHolder.pop();
                 viewport.textContent = numHolder.join("");
                 if (numHolder.length === 0 && num1.length === 0){
@@ -73,6 +88,7 @@ function btnListener() {
                     smallViewport.textContent = numHolder.join("");
                 }
             } else if (button.textContent === "Clear") {
+                percentTrue = false;
                 numHolder = [];
                 num1 = [];
                 num2 = [];
@@ -82,6 +98,7 @@ function btnListener() {
                 smallViewport.textContent = "";
                 mathFncHolder = "";
             } else if (button.textContent === "Random # (1-100)") {
+                percentTrue = false;
                 numHolder = [];
                 num1 = [];
                 num2 = [];
@@ -267,17 +284,21 @@ function percentListener() {
         let input1 = document.createElement('input');
         let input2 = document.createElement('input');
         let pText = document.createElement('p');
+        let pText2 = document.createElement('p');
         input1.type = "integer";
         input1.maxLength = "7";
-        input1.classList.add("percent");
+        input1.classList.add("percent1");
         input2.type = "integer";
         input2.maxLength = "7";
-        input2.classList.add("percent");
+        input2.classList.add("percent2");
         pText.classList.add("pText");
+        pText2.classList.add("pText2");
         viewport.appendChild(input1);
         viewport.appendChild(pText);
         pText.textContent = "% of"
         viewport.appendChild(input2);
+        viewport.appendChild(pText2);
+        pText2.textContent = "= 0";
         viewport.appendChild(document.createElement("br"));
     }
-}
+};
