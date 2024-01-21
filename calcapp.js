@@ -13,6 +13,7 @@ let numHolder = [];
 let mathFncHolder = "";
 let num1 = [];
 let num2 = [];
+let equalsHolder = [];
 
 function btnListener() {
     numberBtn.forEach(button => {
@@ -29,12 +30,39 @@ function btnListener() {
     allBtns.forEach(button => {
         button.addEventListener('click', () => {
             if (button.textContent === "="){
-                if (numHolder.length >= 1 && num1.length >= 1) {
+                if (numHolder.join('') === '0' && mathFncHolder === "/"){
+                    viewport.textContent = "How dare you..";
+                } else if (numHolder.length >= 1 && num1.length >= 1) {
                     num2 = numHolder;
+                    equalsHolder = numHolder;
                     numHolder = [];
                     timeToMath(num1, num2, mathFncHolder);
                     num1 = [sumTotal.toString()];
                     num2 = [];
+                } else if (num1.length === 1 && numHolder.length === 0 && mathFncHolder.length === 1){
+                    num1 = num1.join('');
+                    equalsHolder = equalsHolder.join('');
+                    if (mathFncHolder === "*") {
+                        sumTotal = parseFloat(num1) * parseFloat(equalsHolder);
+                        viewport.textContent = sumTotal;
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "/") {
+                        sumTotal = parseFloat(num1) / parseFloat(equalsHolder);
+                        viewport.textContent = sumTotal;
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "+") {
+                        sumTotal = parseFloat(num1) + parseFloat(equalsHolder);
+                        viewport.textContent = sumTotal;
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "-") {
+                        sumTotal = parseFloat(num1) - parseFloat(equalsHolder);
+                        viewport.textContent = sumTotal;
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    }
                 }
             } else if (button.textContent === "Del") {
                 numHolder.pop();
@@ -49,6 +77,7 @@ function btnListener() {
                 numHolder = [];
                 num1 = [];
                 num2 = [];
+                equalsHolder = [];
                 viewport.textContent = 0;
                 mathViewport.textContent = "";
                 smallViewport.textContent = "";
@@ -159,3 +188,16 @@ function timeToMath(num1, num2, mathFncHolder) {
         smallViewport.textContent = "";
     }
 };
+
+
+// Percent mode (replace Night Mode button)
+//
+// when clicked, changes viewport to 2 input fields separated by "percent of"
+//
+// ['x'] percent of ['y'] = ['z'] 
+//
+//
+//
+//
+//
+//
