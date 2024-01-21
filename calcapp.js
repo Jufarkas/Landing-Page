@@ -1,8 +1,4 @@
 const numberBtn = document.querySelectorAll('.number');
-const clearBtn = document.getElementById('clear');
-const deleteBtn = document.getElementById('delete');
-const rngBtn = document.getElementById('rng');
-const percentBtn = document.getElementById('percent');
 const mathBtns = document.querySelectorAll('.mathFnc');
 const allBtns = document.querySelectorAll('button');
 let viewport = document.querySelector('.result');
@@ -112,6 +108,12 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "*";
                     mathViewport.textContent = "*";
+                } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                    comboMath(num1, numHolder, mathFncHolder);
+                    numHolder = [];
+                    num1 = [sumTotal.toString()];
+                    mathFncHolder = "*";
+                    mathViewport.textContent = "*";
                 } else if (numHolder.length > 0 && num1.length > 0){
                     mathFncHolder = "*";
                     mathViewport.textContent = "*";
@@ -125,6 +127,12 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "/";
                     mathViewport.textContent = "/";
+                } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                    comboMath(num1, numHolder, mathFncHolder);
+                    numHolder = [];
+                    num1 = [sumTotal.toString()];
+                    mathFncHolder = "/";
+                    mathViewport.textContent = "/"
                 } else if (numHolder.length > 0 && num1.length > 0){
                     mathFncHolder = "/";
                     mathViewport.textContent = "/"
@@ -138,6 +146,12 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "+";
                     mathViewport.textContent = "+"
+                } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                    comboMath(num1, numHolder, mathFncHolder);
+                    numHolder = [];
+                    num1 = [sumTotal.toString()];
+                    mathFncHolder = "+";
+                    mathViewport.textContent = "+"
                 } else if (numHolder.length > 0 && num1.length > 0){
                     mathFncHolder = "+";
                     mathViewport.textContent = "+"
@@ -149,6 +163,12 @@ function mathFncWatcher() {
                 }
             } else if (button.textContent === "-"){
                 if (numHolder.length === 0 && num1.length >= 1) {
+                    mathFncHolder = "-";
+                    mathViewport.textContent = "-"
+                } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                    comboMath(num1, numHolder, mathFncHolder);
+                    numHolder = [];
+                    num1 = [sumTotal.toString()];
                     mathFncHolder = "-";
                     mathViewport.textContent = "-"
                 } else if (numHolder.length > 0 && num1.length > 0){
@@ -171,7 +191,6 @@ function timeToMath(num1, num2, mathFncHolder) {
     num2 = num2.join('');
     if (mathFncHolder === "*") {
         sumTotal = parseFloat(num1) * parseFloat(num2);
-        // viewport.textContent = sumTotal;
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
         mathViewport.textContent = "";
         smallViewport.textContent = "";
@@ -192,6 +211,43 @@ function timeToMath(num1, num2, mathFncHolder) {
         smallViewport.textContent = "";
     }
 };
+
+
+function comboMath(num1, numHolder, mathFncHolder) {
+    num1 = num1.join('');
+    num2 = numHolder.join('');
+    if (mathFncHolder === "*") {
+        numHolder = [];
+        sumTotal = parseFloat(num1) * parseFloat(num2);
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        smallViewport.textContent = numHolder;
+        num1 = [sumTotal.toString()];
+        num2 = []; 
+    } else if (mathFncHolder === "/") {
+        numHolder = [];
+        sumTotal = parseFloat(num1) / parseFloat(num2);
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        smallViewport.textContent = numHolder;
+        num1 = [sumTotal.toString()];
+        num2 = []; 
+    } else if (mathFncHolder === "+") {
+        numHolder = [];
+        sumTotal = parseFloat(num1) + parseFloat(num2);
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        smallViewport.textContent = numHolder;
+        num1 = [sumTotal.toString()];
+        num2 = [];        
+    } else if (mathFncHolder === "-") {
+        numHolder = [];
+        sumTotal = parseFloat(num1) - parseFloat(num2);
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        smallViewport.textContent = numHolder;
+        num1 = [sumTotal.toString()];
+        num2 = [];        
+    }
+}
+
+
 
 
 // Percent mode (replace Night Mode button)
