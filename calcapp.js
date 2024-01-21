@@ -47,22 +47,22 @@ function btnListener() {
                     equalsHolder = equalsHolder.join('');
                     if (mathFncHolder === "*") {
                         sumTotal = parseFloat(num1) * parseFloat(equalsHolder);
-                        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "/") {
                         sumTotal = parseFloat(num1) / parseFloat(equalsHolder);
-                        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "+") {
                         sumTotal = parseFloat(num1) + parseFloat(equalsHolder);
-                        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "-") {
                         sumTotal = parseFloat(num1) - parseFloat(equalsHolder);
-                        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     }
@@ -172,22 +172,22 @@ function timeToMath(num1, num2, mathFncHolder) {
     if (mathFncHolder === "*") {
         sumTotal = parseFloat(num1) * parseFloat(num2);
         // viewport.textContent = sumTotal;
-        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "/") {
         sumTotal = parseFloat(num1) / parseFloat(num2);
-        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "+") {
         sumTotal = parseFloat(num1) + parseFloat(num2);
-        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "-") {
         sumTotal = parseFloat(num1) - parseFloat(num2);
-        viewport.textContent = Math.round(sumTotal * 1000000)/1000000;
+        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     }
