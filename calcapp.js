@@ -292,7 +292,7 @@ function percentListener() {
         let pText = document.createElement('p');
         let pText2 = document.createElement('p');
         input1.type = "integer";
-        input1.maxLength = "7";
+        input1.maxLength = "4";
         input1.classList.add("percent1");
         input2.type = "integer";
         input2.maxLength = "7";
