@@ -279,6 +279,12 @@ function percentListener() {
     if (percentTrue === true){
         return;
     } else {
+        numHolder = [];
+        num1 = [];
+        num2 = [];
+        equalsHolder = [];
+        mathViewport.textContent = "";
+        smallViewport.textContent = "";
         percentTrue = true;
         viewport.textContent = "";
         let input1 = document.createElement('input');
