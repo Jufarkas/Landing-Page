@@ -367,13 +367,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 400px;
+    width: 410px;
     height: auto;
     background-color: #afafb1;
-    border: 10px solid rgb(0, 0, 0);
+    border: 5px solid rgb(0, 0, 0);
 }
 
-.topNums {
+.calcViewport {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -382,6 +382,8 @@ body {
     padding: 0;
     height: 30px;
     font-size: 15px;
+    font-family: "Dosis", sans-serif;
+    font-style: normal;
 }
 
 .currentMathFnc {
@@ -392,9 +394,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Dosis", sans-serif;
+    font-style: normal;
     font-size: 60px;
-    font-weight: 800;
+    font-weight: 500;
     margin: 0;
     border: 0;
     padding-bottom: 20px;
@@ -438,8 +441,10 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 70px;
-    width: 80px;
+    height: 120px;
+    width: 82px;
+    font-size: 16px;
+    box-shadow: 0 1px  rgb(122, 122, 122);
 }
 
 .calc-buttons {
@@ -457,6 +462,61 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 70px;
-    width: 80px;
+    height: 120px;
+    width: 82px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: "Dosis", sans-serif;
+    font-style: normal;
+    box-shadow: 0 1px  rgb(122, 122, 122);
+}
+
+.number:hover {
+    background-color: rgba(255, 255, 255, 0.747);
+}
+
+.mathFnc:hover {
+    background-color: rgba(255, 255, 255, 0.747);
+}
+
+.left-buttons button:hover {
+    background-color: rgba(158, 0, 0, 0.432);
+}
+
+#percent:hover {
+    background-color: rgba(21, 255, 0, 0.144);
+}
+
+#rng:hover {
+    background-color: rgba(21, 255, 0, 0.144);
+}
+
+.number:active {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px rgb(73, 73, 73);
+    transform: translateY(2px);
+}
+
+.mathFnc:active {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px rgb(73, 73, 73);
+    transform: translateY(2px);
+}
+
+.left-buttons button:active {
+    background-color: rgba(255, 0, 0, 0.432);
+    box-shadow: 0 2px rgb(73, 73, 73);
+    transform: translateY(2px);
+}
+
+#percent:active {
+    background-color: rgba(21, 255, 0, 0.432);
+    box-shadow: 0 2px rgb(73, 73, 73);
+    transform: translateY(2px); 
+}
+
+#rng:active {
+    background-color: rgba(21, 255, 0, 0.432);
+    box-shadow: 0 2px rgb(73, 73, 73);
+    transform: translateY(2px);  
 }
