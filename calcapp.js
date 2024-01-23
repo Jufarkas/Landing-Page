@@ -15,15 +15,27 @@ let percentTrue = false;
 function btnListener() {
     numberBtn.forEach(button => {
         button.addEventListener('click', () => {
-            if (percentTrue === true){
-                percentTrue = false;
-            }
             if (button.textContent === "."){
                 if (numHolder.includes(".")){
                     return;
                 }
             }
-            if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
+            if (percentTrue === true){
+                let percent1 = document.querySelector('.percent1');
+                let percent2 = document.querySelector('.percent2');
+                if (percent1.value.length >= 4){
+                    return;
+                } else {
+                percent1.value = percent1.value + button.textContent;
+                }
+                    //*
+                    //*
+                    //*
+                    //need to figure out percent2 input/deletion
+                    //*
+                    //*
+                    //*
+            } else if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
                 numHolder.push(button.textContent);
                 viewport.textContent = numHolder.join("");
                 num1 = [];
@@ -55,6 +67,7 @@ function btnListener() {
                 })
             } else if (button.textContent === "="){
                 if (numHolder.join('') === '0' && mathFncHolder === "/"){
+                // cheeky little message if trying to divide by zero
                     viewport.textContent = "How dare you..";
                 } else if (numHolder.length >= 1 && num1.length >= 1) {
                     num2 = numHolder;
@@ -89,14 +102,26 @@ function btnListener() {
                     }
                 }
             } else if (button.textContent === "Del") {
-                percentTrue = false;
+                if (percentTrue === true){
+                    let percent1 = document.querySelector('.percent1');
+                    let percent2 = document.querySelector('.percent2');
+                    percent1.value = percent1.value.slice(0, -1);
+                    //*
+                    //*
+                    //*
+                    //need to figure out percent2 input/deletion
+                    //*
+                    //*
+                    //*
+                } else if (percentTrue === false){
                 numHolder.pop();
                 viewport.textContent = numHolder.join("");
-                if (numHolder.length === 0 && num1.length === 0){
+                    if (numHolder.length === 0 && num1.length === 0){
                     viewport.textContent = 0;
-                } else if (num1.length >= 1){
+                    } else if (num1.length >= 1){
                     viewport.textContent = num1.join("");
                     smallViewport.textContent = numHolder.join("");
+                    }
                 }
             } else if (button.textContent === "Clear") {
                 percentTrue = false;
@@ -298,7 +323,7 @@ function percentListener() {
     // if it's already on, do nothing if pressed
     if (percentTrue === true){
         return;
-    // turns on Percent displayer
+    // turn on Percent displayer
     } else {
         // clear all fields in case there's previous calculations present
         numHolder = [];
@@ -314,10 +339,12 @@ function percentListener() {
         let input2 = document.createElement('input');
         let pText = document.createElement('p');
         let pText2 = document.createElement('p');
-        input1.type = "integer";
+        // input1.type = "integer";
+        input1.type = "tel";
         input1.maxLength = "4"; // limiting to 4 to avoid overflow (and let's be honest, who needs to know what > %10,000 of something is with my little calculator?)
         input1.classList.add("percent1");
-        input2.type = "integer";
+        // input2.type = "integer";
+        input2.type = "tel";
         input2.maxLength = "7"; // limiting to avoid overflow while still allowing someone to find out what %9999 of 9999999 is, if they must know
         input2.classList.add("percent2");
         pText.classList.add("pText");
