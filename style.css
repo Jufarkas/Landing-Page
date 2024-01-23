@@ -367,7 +367,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 410px;
+    width: 400px;
     height: auto;
     background-color: #afafb1;
     border: 5px solid rgb(0, 0, 0);
@@ -442,9 +442,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 120px;
-    width: 82px;
+    width: 72px;
     font-size: 16px;
     box-shadow: 0 1px  rgb(122, 122, 122);
+    -webkit-tap-highlight-color: black;
 }
 
 .calc-buttons {
@@ -470,25 +471,26 @@ body {
     font-style: normal;
     box-shadow: 0 1px  rgb(122, 122, 122);
 }
-
-.number:hover {
+@media (pointer: fine) { /* to stop touch screens from keeping the hover on-click */
+    .number:hover {
     background-color: rgba(255, 255, 255, 0.747);
-}
+    }
 
-.mathFnc:hover {
+    .mathFnc:hover {
     background-color: rgba(255, 255, 255, 0.747);
-}
+    }
 
-.left-buttons button:hover {
+    .left-buttons button:hover {
     background-color: rgba(158, 0, 0, 0.432);
-}
+    }
 
-#percent:hover {
+    #percent:hover {
     background-color: rgba(21, 255, 0, 0.144);
-}
+    }
 
-#rng:hover {
+    #rng:hover {
     background-color: rgba(21, 255, 0, 0.144);
+    }
 }
 
 .number:active {
