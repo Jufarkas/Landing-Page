@@ -18,7 +18,18 @@ function btnListener() {
             if (percentTrue === true){
                 percentTrue = false;
             }
-            if (num1.length > 0){
+            if (button.textContent === "."){
+                if (numHolder.includes(".")){
+                    return;
+                }
+            }
+            if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
+                numHolder.push(button.textContent);
+                viewport.textContent = numHolder.join("");
+                num1 = [];
+                mathFncHolder = "";
+                equalsHolder = [];
+            } else if (num1.length > 0){
                 numHolder.push(button.textContent);
                 smallViewport.textContent = numHolder.join("");
             } else {
@@ -50,7 +61,7 @@ function btnListener() {
                     equalsHolder = numHolder;
                     numHolder = [];
                     timeToMath(num1, num2, mathFncHolder);
-                    num1 = [sumTotal.toString()];
+                    num1 = [(Math.round(sumTotal * 10000000)/10000000).toString()];
                     num2 = [];
                 } else if (num1.length === 1 && numHolder.length === 0 && mathFncHolder.length === 1){
                     num1 = num1.join('');
@@ -97,7 +108,7 @@ function btnListener() {
                 mathViewport.textContent = "";
                 smallViewport.textContent = "";
                 mathFncHolder = "";
-            } else if (button.textContent === "Random # (1-100)") {
+            } else if (button.textContent === "#RNG (1-100)") {
                 percentTrue = false;
                 numHolder = [];
                 num1 = [];
@@ -114,7 +125,7 @@ function btnListener() {
 btnListener();
 mathFncWatcher();
 
-
+// Watches the math operator buttons
 function mathFncWatcher() {
     mathBtns.forEach(button => {
         button.addEventListener('click', () => {
@@ -125,8 +136,9 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "*";
                     mathViewport.textContent = "*";
+                    equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
-                    comboMath(num1, numHolder, mathFncHolder);
+                    operatorWatch(num1, numHolder, mathFncHolder);
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "*";
@@ -144,8 +156,9 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "/";
                     mathViewport.textContent = "/";
+                    equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
-                    comboMath(num1, numHolder, mathFncHolder);
+                    operatorWatch(num1, numHolder, mathFncHolder);
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "/";
@@ -163,8 +176,9 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "+";
                     mathViewport.textContent = "+"
+                    equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
-                    comboMath(num1, numHolder, mathFncHolder);
+                    operatorWatch(num1, numHolder, mathFncHolder);
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "+";
@@ -182,8 +196,9 @@ function mathFncWatcher() {
                 if (numHolder.length === 0 && num1.length >= 1) {
                     mathFncHolder = "-";
                     mathViewport.textContent = "-"
+                    equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
-                    comboMath(num1, numHolder, mathFncHolder);
+                    operatorWatch(num1, numHolder, mathFncHolder);
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "-";
@@ -202,38 +217,52 @@ function mathFncWatcher() {
     })
 }
 
+// Execute current math equation
 
 function timeToMath(num1, num2, mathFncHolder) {
     num1 = num1.join('');
     num2 = num2.join('');
     if (mathFncHolder === "*") {
         sumTotal = parseFloat(num1) * parseFloat(num2);
+        // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        // clear top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "/") {
         sumTotal = parseFloat(num1) / parseFloat(num2);
+        // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        // clear top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "+") {
         sumTotal = parseFloat(num1) + parseFloat(num2);
+        // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        // clear top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "-") {
         sumTotal = parseFloat(num1) - parseFloat(num2);
+        // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        // clear top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     }
 };
 
 
-function comboMath(num1, numHolder, mathFncHolder) {
+// Function to execute current equation if another operator is pressed
+// ex: user inputs "4 + 5 [another operator]"
+// on the selection of the second [operator] the original equation will execute, return the result, and then ready that result to be used with the new operator and number entry
+
+function operatorWatch(num1, numHolder, mathFncHolder) {
     num1 = num1.join('');
     num2 = numHolder.join('');
     if (mathFncHolder === "*") {
+        // clear out numHolder for future entry, calc the total and round it, set num1 to the sum so it's used again for the next calculation, && clear num2 to ready for input again
         numHolder = [];
         sumTotal = parseFloat(num1) * parseFloat(num2);
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
@@ -265,20 +294,13 @@ function comboMath(num1, numHolder, mathFncHolder) {
 }
 
 
-
-
-// Percent mode (replace Night Mode button)
-//
-// when clicked, changes viewport to 2 input fields separated by "percent of"
-//
-// ['x'] percent of ['y'] = ['z'] 
-//
-
-
 function percentListener() {
+    // if it's already on, do nothing if pressed
     if (percentTrue === true){
         return;
+    // turns on Percent displayer
     } else {
+        // clear all fields in case there's previous calculations present
         numHolder = [];
         num1 = [];
         num2 = [];
@@ -287,15 +309,16 @@ function percentListener() {
         smallViewport.textContent = "";
         percentTrue = true;
         viewport.textContent = "";
+        // create new elements to hold user input, add classes and append to '.result'
         let input1 = document.createElement('input');
         let input2 = document.createElement('input');
         let pText = document.createElement('p');
         let pText2 = document.createElement('p');
         input1.type = "integer";
-        input1.maxLength = "4";
+        input1.maxLength = "4"; // limiting to 4 to avoid overflow (and let's be honest, who needs to know what > %10,000 of something is with my little calculator?)
         input1.classList.add("percent1");
         input2.type = "integer";
-        input2.maxLength = "7";
+        input2.maxLength = "7"; // limiting to avoid overflow while still allowing someone to find out what %9999 of 9999999 is, if they must know
         input2.classList.add("percent2");
         pText.classList.add("pText");
         pText2.classList.add("pText2");
