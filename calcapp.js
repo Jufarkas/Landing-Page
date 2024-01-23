@@ -37,7 +37,7 @@ function btnListener() {
             viewport.textContent = numHolder.join("");
             }
         })
-    })
+    });
     allBtns.forEach(button => {
         button.addEventListener('click', () => {
             if (button.textContent === "%"){
