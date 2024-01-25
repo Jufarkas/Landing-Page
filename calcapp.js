@@ -2,8 +2,10 @@ const numberBtn = document.querySelectorAll('.number');
 const mathBtns = document.querySelectorAll('.mathFnc');
 const allBtns = document.querySelectorAll('button');
 let viewport = document.querySelector('.result');
-let smallViewport = document.querySelector('.nextNum')
-let mathViewport = document.querySelector('.currentMathFnc')
+viewport.style.fontSize = "105px";
+viewport.style.overflow = "hidden";
+let smallViewport = document.querySelector('.nextNum');
+let mathViewport = document.querySelector('.currentMathFnc');
 let sumTotal = 0;
 let numHolder = [];
 let mathFncHolder = "";
@@ -12,6 +14,200 @@ let num2 = [];
 let equalsHolder = [];
 let percentTrue = false;
 
+// keyboard listener
+document.addEventListener('keypress', (e) => {
+    if(e.repeat){
+        return;
+    };
+    switch (e.key) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case "0":
+        case ".":
+            checkOverflow();
+            if (e.key === "."){
+                if (numHolder.includes(".")){
+                    return;
+                }
+            };
+            if (percentTrue === true){
+                if (document.activeElement.nodeName == 'TEXTAREA'
+                || document.activeElement.nodeName == 'INPUT'
+                || (document.activeElement.nodeName == 'DIV'
+                && document.activeElement.isContentEditable)) {
+                    document.activeElement.textContent = (e.key);
+                }
+            } else if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
+                numHolder.push(e.key);
+                viewport.textContent = numHolder.join("");
+                num1 = [];
+                mathFncHolder = "";
+                equalsHolder = [];
+            } else if (num1.length > 0){
+                numHolder.push(e.key);
+                smallViewport.textContent = numHolder.join("");
+            } else {
+            numHolder.push(e.key);
+            viewport.textContent = numHolder.join("");
+            };
+            // console.log(e.key)
+            break;
+        case "Enter":
+            if (numHolder.join('') === '0' && mathFncHolder === "/"){
+                // cheeky little message if trying to divide by zero
+                    viewport.textContent = "Nice try..";
+                } else if (numHolder.length >= 1 && num1.length >= 1) {
+                    num2 = numHolder;
+                    equalsHolder = numHolder;
+                    numHolder = [];
+                    timeToMath(num1, num2, mathFncHolder);
+                    checkOverflow();
+                    num1 = [(Math.round(sumTotal * 10000000)/10000000).toString()];
+                    num2 = [];
+                } else if (num1.length === 1 && numHolder.length === 0 && mathFncHolder.length === 1){
+                    num1 = num1.join('');
+                    equalsHolder = equalsHolder.join('');
+                    if (mathFncHolder === "*") {
+                        sumTotal = parseFloat(num1) * parseFloat(equalsHolder);
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "/") {
+                        sumTotal = parseFloat(num1) / parseFloat(equalsHolder);
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "+") {
+                        sumTotal = parseFloat(num1) + parseFloat(equalsHolder);
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    } else if (mathFncHolder === "-") {
+                        sumTotal = parseFloat(num1) - parseFloat(equalsHolder);
+                        viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
+                        num1 = [sumTotal.toString()];
+                        equalsHolder = [equalsHolder];
+                    };
+                };
+        break;
+        case "*":
+            if (numHolder.length === 0 && num1.length >= 1) {
+                mathFncHolder = "*";
+                mathViewport.textContent = "*";
+                equalsHolder = [];
+            } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                operatorWatch(num1, numHolder, mathFncHolder);
+                checkOverflow();
+                numHolder = [];
+                num1 = [sumTotal.toString()];
+                mathFncHolder = "*";
+                mathViewport.textContent = "*";
+            } else if (numHolder.length > 0 && num1.length > 0){
+                mathFncHolder = "*";
+                mathViewport.textContent = "*";
+            } else if (num1.length === 0){
+                mathFncHolder = "*";
+                mathViewport.textContent = "*"
+                num1 = numHolder;
+                numHolder = [];  
+            }
+            break;
+        case "+":
+            if (numHolder.length === 0 && num1.length >= 1) {
+                mathFncHolder = "+";
+                mathViewport.textContent = "+"
+                equalsHolder = [];
+            } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                operatorWatch(num1, numHolder, mathFncHolder);
+                checkOverflow();
+                numHolder = [];
+                num1 = [sumTotal.toString()];
+                mathFncHolder = "+";
+                mathViewport.textContent = "+"
+            } else if (numHolder.length > 0 && num1.length > 0){
+                mathFncHolder = "+";
+                mathViewport.textContent = "+"
+            } else if (num1.length === 0) {
+                mathFncHolder = "+";
+                mathViewport.textContent = "+"
+                num1 = numHolder;
+                numHolder = [];
+            }
+        break;
+        case "-":
+            if (numHolder.length === 0 && num1.length >= 1) {
+                mathFncHolder = "-";
+                mathViewport.textContent = "-"
+                equalsHolder = [];
+            } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                operatorWatch(num1, numHolder, mathFncHolder);
+                checkOverflow();
+                numHolder = [];
+                num1 = [sumTotal.toString()];
+                mathFncHolder = "-";
+                mathViewport.textContent = "-"
+            } else if (numHolder.length > 0 && num1.length > 0){
+                mathFncHolder = "-";
+                mathViewport.textContent = "-"
+            } else if (num1.length === 0){
+                mathFncHolder = "-";
+                mathViewport.textContent = "-"
+                num1 = numHolder;
+                numHolder = [];
+            }
+        break;
+        case "/":
+            if (numHolder.length === 0 && num1.length >= 1) {
+                mathFncHolder = "/";
+                mathViewport.textContent = "/";
+                equalsHolder = [];
+            } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
+                operatorWatch(num1, numHolder, mathFncHolder);
+                checkOverflow();
+                num1 = [sumTotal.toString()];
+                mathFncHolder = "/";
+                mathViewport.textContent = "/"
+            } else if (numHolder.length > 0 && num1.length > 0){
+                mathFncHolder = "/";
+                mathViewport.textContent = "/"
+            } else if (num1.length === 0){
+                mathFncHolder = "/";
+                mathViewport.textContent = "/"
+                num1 = numHolder;
+                numHolder = [];  
+            }
+        break;
+        case "Backspace":
+            checkOverflow();
+                if (percentTrue === true){
+                    return;
+                } else if (percentTrue === false){
+                numHolder.pop();
+                viewport.textContent = numHolder.join("");
+                    if (numHolder.length === 0 && num1.length === 0){
+                    viewport.textContent = 0;
+                    } else if (num1.length >= 1){
+                    viewport.textContent = num1.join("");
+                    smallViewport.textContent = numHolder.join("");
+                    };
+                };
+            break;
+        default:
+          return;
+    }
+})
+
 function btnListener() {
     numberBtn.forEach(button => {
         button.addEventListener('click', () => {
@@ -19,22 +215,9 @@ function btnListener() {
                 if (numHolder.includes(".")){
                     return;
                 }
-            }
+            };
             if (percentTrue === true){
-                let percent1 = document.querySelector('.percent1');
-                let percent2 = document.querySelector('.percent2');
-                if (percent1.value.length >= 4){
-                    return;
-                } else {
-                percent1.value = percent1.value + button.textContent;
-                }
-                    //*
-                    //*
-                    //*
-                    //need to figure out percent2 input/deletion
-                    //*
-                    //*
-                    //*
+                return;
             } else if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
                 numHolder.push(button.textContent);
                 viewport.textContent = numHolder.join("");
@@ -47,8 +230,9 @@ function btnListener() {
             } else {
             numHolder.push(button.textContent);
             viewport.textContent = numHolder.join("");
-            }
-        })
+            };
+        checkOverflow();
+        });
     });
     allBtns.forEach(button => {
         button.addEventListener('click', () => {
@@ -60,20 +244,21 @@ function btnListener() {
                 percent1.addEventListener('input', () => {
                     pText2.textContent = 
                     "= " + Math.round(((percent1.value / 100) * percent2.value) * 1000)/1000;
-                })
+                });
                 percent2.addEventListener('input', () => {
                     pText2.textContent = 
                     "= " + Math.round(((percent1.value / 100) * percent2.value) * 1000)/1000;
-                })
+                });
             } else if (button.textContent === "="){
                 if (numHolder.join('') === '0' && mathFncHolder === "/"){
                 // cheeky little message if trying to divide by zero
-                    viewport.textContent = "How dare you..";
+                    viewport.textContent = "Nice try..";
                 } else if (numHolder.length >= 1 && num1.length >= 1) {
                     num2 = numHolder;
                     equalsHolder = numHolder;
                     numHolder = [];
                     timeToMath(num1, num2, mathFncHolder);
+                    checkOverflow();
                     num1 = [(Math.round(sumTotal * 10000000)/10000000).toString()];
                     num2 = [];
                 } else if (num1.length === 1 && numHolder.length === 0 && mathFncHolder.length === 1){
@@ -82,37 +267,33 @@ function btnListener() {
                     if (mathFncHolder === "*") {
                         sumTotal = parseFloat(num1) * parseFloat(equalsHolder);
                         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "/") {
                         sumTotal = parseFloat(num1) / parseFloat(equalsHolder);
                         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "+") {
                         sumTotal = parseFloat(num1) + parseFloat(equalsHolder);
                         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
                     } else if (mathFncHolder === "-") {
                         sumTotal = parseFloat(num1) - parseFloat(equalsHolder);
                         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+                        checkOverflow();
                         num1 = [sumTotal.toString()];
                         equalsHolder = [equalsHolder];
-                    }
-                }
-            } else if (button.textContent === "Del") {
+                    };
+                };
+            } else if (button.textContent === "DEL") {
+                checkOverflow();
                 if (percentTrue === true){
-                    let percent1 = document.querySelector('.percent1');
-                    let percent2 = document.querySelector('.percent2');
-                    percent1.value = percent1.value.slice(0, -1);
-                    //*
-                    //*
-                    //*
-                    //need to figure out percent2 input/deletion
-                    //*
-                    //*
-                    //*
+                    return;
                 } else if (percentTrue === false){
                 numHolder.pop();
                 viewport.textContent = numHolder.join("");
@@ -121,9 +302,10 @@ function btnListener() {
                     } else if (num1.length >= 1){
                     viewport.textContent = num1.join("");
                     smallViewport.textContent = numHolder.join("");
-                    }
-                }
-            } else if (button.textContent === "Clear") {
+                    };
+                };
+            } else if (button.textContent === "CLEAR") {
+                viewport.style.fontSize = "105px";
                 percentTrue = false;
                 numHolder = [];
                 num1 = [];
@@ -142,8 +324,8 @@ function btnListener() {
                 mathViewport.textContent = "";
                 smallViewport.textContent = "";
             };
-        })
-    })
+        });
+    });
 };
 
 
@@ -164,6 +346,7 @@ function mathFncWatcher() {
                     equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                     operatorWatch(num1, numHolder, mathFncHolder);
+                    checkOverflow();
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "*";
@@ -184,7 +367,7 @@ function mathFncWatcher() {
                     equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                     operatorWatch(num1, numHolder, mathFncHolder);
-                    numHolder = [];
+                    checkOverflow();
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "/";
                     mathViewport.textContent = "/"
@@ -204,6 +387,7 @@ function mathFncWatcher() {
                     equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                     operatorWatch(num1, numHolder, mathFncHolder);
+                    checkOverflow();
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "+";
@@ -224,6 +408,7 @@ function mathFncWatcher() {
                     equalsHolder = [];
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                     operatorWatch(num1, numHolder, mathFncHolder);
+                    checkOverflow();
                     numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "-";
@@ -251,28 +436,28 @@ function timeToMath(num1, num2, mathFncHolder) {
         sumTotal = parseFloat(num1) * parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
-        // clear top corner info
+        // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "/") {
         sumTotal = parseFloat(num1) / parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
-        // clear top corner info
+        // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "+") {
         sumTotal = parseFloat(num1) + parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
-        // clear top corner info
+        // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     } else if (mathFncHolder === "-") {
         sumTotal = parseFloat(num1) - parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
-        // clear top corner info
+        // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
     }
@@ -287,7 +472,7 @@ function operatorWatch(num1, numHolder, mathFncHolder) {
     num1 = num1.join('');
     num2 = numHolder.join('');
     if (mathFncHolder === "*") {
-        // clear out numHolder for future entry, calc the total and round it, set num1 to the sum so it's used again for the next calculation, && clear num2 to ready for input again
+        // CLEAR out numHolder for future entry, calc the total and round it, set num1 to the sum so it's used again for the next calculation, && CLEAR num2 to ready for input again
         numHolder = [];
         sumTotal = parseFloat(num1) * parseFloat(num2);
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
@@ -325,7 +510,7 @@ function percentListener() {
         return;
     // turn on Percent displayer
     } else {
-        // clear all fields in case there's previous calculations present
+        // CLEAR all fields in case there's previous calculations present
         numHolder = [];
         num1 = [];
         num2 = [];
@@ -345,7 +530,7 @@ function percentListener() {
         input1.classList.add("percent1");
         // input2.type = "integer";
         input2.type = "tel";
-        input2.maxLength = "7"; // limiting to avoid overflow while still allowing someone to find out what %9999 of 9999999 is, if they must know
+        input2.maxLength = "4"; // limiting to avoid overflow while still allowing someone to find out what %9999= of 9999 is, if they must know
         input2.classList.add("percent2");
         pText.classList.add("pText");
         pText2.classList.add("pText2");
@@ -358,3 +543,38 @@ function percentListener() {
         viewport.appendChild(document.createElement("br"));
     }
 };
+
+
+//checks for text overflow (in my questionable way of doing it) and changes based on input
+// scattered the function throughout button presses to keep watch for changes
+
+function checkOverflow(){
+    if (viewport.textContent.length < 7){
+        viewport.style.fontSize = "105px";
+
+    } else if (viewport.textContent.length > 7){
+        viewport.style.fontSize = "85px";
+    }
+    
+    if (viewport.textContent.length > 9){
+        viewport.style.fontSize = "70px";
+    }
+
+    if (viewport.textContent.length > 11){
+            viewport.style.fontSize = "60px";
+    }
+
+    if (viewport.textContent.length > 13){
+        viewport.style.fontSize = "50px";
+    }
+    
+    if (viewport.textContent.length > 15){
+        viewport.style.fontSize = "43px";
+    }
+
+    if (viewport.textContent.length > 18){
+            viewport.style.fontSize = "37px";
+    }
+};
+
+checkOverflow();
