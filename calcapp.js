@@ -15,7 +15,7 @@ let equalsHolder = [];
 let percentTrue = false;
 
 // keyboard listener
-document.addEventListener('keypress', (e) => {
+document.addEventListener('keydown', (e) => {
     if(e.repeat){
         return;
     };
@@ -168,6 +168,7 @@ document.addEventListener('keypress', (e) => {
             }
         break;
         case "/":
+            e.preventDefault;
             if (numHolder.length === 0 && num1.length >= 1) {
                 mathFncHolder = "/";
                 mathViewport.textContent = "/";
@@ -175,6 +176,7 @@ document.addEventListener('keypress', (e) => {
             } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                 operatorWatch(num1, numHolder, mathFncHolder);
                 checkOverflow();
+                numHolder = [];
                 num1 = [sumTotal.toString()];
                 mathFncHolder = "/";
                 mathViewport.textContent = "/"
@@ -302,6 +304,18 @@ function btnListener() {
                     } else if (num1.length >= 1){
                     viewport.textContent = num1.join("");
                     smallViewport.textContent = numHolder.join("");
+                    }
+                    if (numHolder.length === 0 && equalsHolder.length > 0){
+                        viewport.style.fontSize = "105px";
+                        percentTrue = false;
+                        numHolder = [];
+                        num1 = [];
+                        num2 = [];
+                        equalsHolder = [];
+                        viewport.textContent = 0;
+                        mathViewport.textContent = "";
+                        smallViewport.textContent = "";
+                        mathFncHolder = "";   
                     };
                 };
             } else if (button.textContent === "CLEAR") {
@@ -368,6 +382,7 @@ function mathFncWatcher() {
                 } else if (numHolder.length > 0 && num1.length > 0 && mathFncHolder.length === 1){
                     operatorWatch(num1, numHolder, mathFncHolder);
                     checkOverflow();
+                    numHolder = [];
                     num1 = [sumTotal.toString()];
                     mathFncHolder = "/";
                     mathViewport.textContent = "/"
