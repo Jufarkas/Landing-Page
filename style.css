@@ -396,9 +396,12 @@ body {
     border-style: solid;
     border-radius: 10px;
     color: rgb(228, 228, 228);
-    text-shadow: 
-    0 1px rgb(0, 52, 61),
-    1px 1px black;
+    text-shadow:
+    0 0 2px rgb(71, 0, 138), 
+    0 1px 1px rgb(20, 17, 20),
+    0 0 3px rgb(0, 0, 0),
+    0px 1px rgb(0, 0, 0), 
+    1px 2px rgb(184, 184, 184);
     box-shadow: 
     inset rgba(46, 52, 65, 0.322) 0px 0px 40px 0px,
     inset rgba(60, 70, 85, 0.5) 0px 0px 30px 0px;
@@ -416,41 +419,54 @@ body {
 
 .result {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     font-family: "Dosis", sans-serif;
     font-style: normal;
+    width: 400px;
+    height: 130px;
     font-size: 72px;
     font-weight: 500;
     margin: 0;
     border: none;
     background-color: transparent;
-    color: rgb(0, 0, 0);
+    color: rgb(228, 228, 228);
     text-shadow:
-    0 0 2px rgb(167, 72, 255), 
+    0 0 2px rgb(71, 0, 138), 
     0 1px 1px rgb(20, 17, 20),
-    0 0 3px rgb(0, 217, 255),
+    0 0 3px rgb(0, 0, 0),
     0px 1px rgb(0, 0, 0), 
-    1px 1px rgb(255, 0, 242);
+    1px 2px rgb(184, 184, 184);
 }
 
 .percent1, .percent2 {
     text-align: center;
-    height: 30px;
-    width: 80px;
+    height: 50px;
+    width: 60px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 800;
-    background-color: #99999b;
-    border-style: none;
+    background-color: #7c7c7c3f;
+    border: solid 2px black;
+    color: rgb(228, 228, 228);
+    text-shadow: 
+    0 1px rgb(0, 52, 61),
+    1px 1px black;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .pText, .pText2 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
     padding: 0px 8px 0px 8px;
+    color: rgb(228, 228, 228);
+    text-shadow: 
+    1px 1px rgb(0, 52, 61),
+    1px 1px black;
 }
+
 
 .topNums h2 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -478,7 +494,7 @@ body {
     height: 72px;
     width: 72px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 400;
     margin-left: 3px;
     background-color: #1d1d1d35;
     color: rgb(0, 0, 0);
