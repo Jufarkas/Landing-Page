@@ -313,11 +313,11 @@ function percentListener() {
         let input2 = document.createElement('input');
         let pText = document.createElement('p');
         let pText2 = document.createElement('p');
-        // input1.type = "integer";
+        // input2.type = "tel" so that on mobile only the numbers are displayed;
         input1.type = "tel";
         input1.maxLength = "4"; // limiting to 4 to avoid overflow (and let's be honest, who needs to know what > %10,000 of something is with my little calculator?)
         input1.classList.add("percent1");
-        // input2.type = "integer";
+        // input2.type = "tel" so that on mobile only the numbers are displayed;
         input2.type = "tel";
         input2.maxLength = "4"; // limiting to avoid overflow while still allowing someone to find out what %9999= of 9999 is, if they must know
         input2.classList.add("percent2");
