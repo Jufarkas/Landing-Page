@@ -44,7 +44,7 @@ document.addEventListener('keydown', (e) => {
                 && document.activeElement.isContentEditable)) {
                     document.activeElement.textContent = (e.key);
                 }
-            } else if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
+            } else if (num1.toString() === (Math.round(sumTotal * 10000000)/10000000).toString() && equalsHolder.length > 0){
                 numHolder.push(e.key);
                 viewport.textContent = numHolder.join("");
                 num1 = [];
@@ -105,7 +105,7 @@ function btnListener() {
             };
             if (percentTrue === true){
                 return;
-            } else if (num1.toString() === sumTotal.toString() && equalsHolder.length > 0){
+            } else if (num1.toString() === (Math.round(sumTotal * 10000000)/10000000).toString() && equalsHolder.length > 0){
                 numHolder.push(button.textContent);
                 viewport.textContent = numHolder.join("");
                 num1 = [];
@@ -221,6 +221,7 @@ function timeToMath(num1, num2, mathFncHolder) {
         sumTotal = parseFloat(num1) * parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        sumTotal = viewport.textContent;
         // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
@@ -228,6 +229,7 @@ function timeToMath(num1, num2, mathFncHolder) {
         sumTotal = parseFloat(num1) / parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        sumTotal = viewport.textContent;
         // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
@@ -235,6 +237,7 @@ function timeToMath(num1, num2, mathFncHolder) {
         sumTotal = parseFloat(num1) + parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        sumTotal = viewport.textContent;
         // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
@@ -242,6 +245,7 @@ function timeToMath(num1, num2, mathFncHolder) {
         sumTotal = parseFloat(num1) - parseFloat(num2);
         // maxed out at the 7th decimal place
         viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+        sumTotal = viewport.textContent;
         // CLEAR top corner info
         mathViewport.textContent = "";
         smallViewport.textContent = "";
@@ -383,18 +387,21 @@ function equalsEnter () {
         if (mathFncHolder === "*") {
             sumTotal = parseFloat(num1) * parseFloat(equalsHolder);
             viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+            sumTotal = viewport.textContent;
             checkOverflow();
             num1 = [sumTotal.toString()];
             equalsHolder = [equalsHolder];
         } else if (mathFncHolder === "/") {
             sumTotal = parseFloat(num1) / parseFloat(equalsHolder);
             viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+            sumTotal = viewport.textContent;
             checkOverflow();
             num1 = [sumTotal.toString()];
             equalsHolder = [equalsHolder];
         } else if (mathFncHolder === "+") {
             sumTotal = parseFloat(num1) + parseFloat(equalsHolder);
             viewport.textContent = Math.round(sumTotal * 10000000)/10000000;
+            sumTotal = viewport.textContent;
             checkOverflow();
             num1 = [sumTotal.toString()];
             equalsHolder = [equalsHolder];
