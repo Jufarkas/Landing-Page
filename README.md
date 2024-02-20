@@ -1,3 +1,7 @@
+Link to landing page:
+
+https://jufarkas.github.io/landing-page
+
 QUICKLINK TO CALCULATOR FROM CALCULATOR PROJECT (it's a hidden link inside the landing page otherwise):
 
 https://jufarkas.github.io/landing-page/calc.html
